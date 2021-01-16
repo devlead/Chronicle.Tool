@@ -2,7 +2,8 @@
 using System.ComponentModel;
 using System.IO;
 using Chronicle.Models;
-using Spectre.Cli;
+using Spectre.Console;
+using Spectre.Console.Cli;
 
 namespace Chronicle.Commands.Settings
 {

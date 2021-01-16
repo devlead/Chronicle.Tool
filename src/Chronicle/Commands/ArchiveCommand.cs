@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Chronicle.Commands.Settings;
 using Microsoft.Extensions.Logging;
-using Spectre.Cli;
+using Spectre.Console.Cli;
 
 namespace Chronicle.Commands
 {

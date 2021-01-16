@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Chronicle.Commands;
-using Spectre.Cli;
+using Spectre.Console.Cli;
 using Spectre.Cli.Extensions.DependencyInjection;
 
 var serviceCollection = new ServiceCollection()

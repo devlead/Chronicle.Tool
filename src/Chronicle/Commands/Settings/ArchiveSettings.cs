@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.IO.Compression;
-using Spectre.Cli;
+using Spectre.Console.Cli;
 
 namespace Chronicle.Commands.Settings
 {
