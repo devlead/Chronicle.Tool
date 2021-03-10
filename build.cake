@@ -50,7 +50,17 @@ Task("Clean")
     .Does<BuildData>(
         static (context, data) => context.CleanDirectories(data.DirectoryPathsToClean)
     )
-    .Then("DPI")
+.Then("Restore")
+    .Does<BuildData>(
+        static (context, data) => context.DotNetCoreRestore(
+            data.ProjectRoot.FullPath,
+            new DotNetCoreRestoreSettings {
+                Runtime = data.Runtime,
+                MSBuildSettings = data.MSBuildSettings
+            }
+        )
+    )
+.Then("DPI")
     .Does<BuildData>(
         static (context, data) => context.DotNetCoreTool(
                 "tool",
@@ -70,18 +80,9 @@ Task("Clean")
                                                                 ? "report"
                                                                 : "analyze"
                                                             )
+                                                        .AppendSwitchQuoted("--buildversion", data.Version)
                 }
             )
-    )
-.Then("Restore")
-    .Does<BuildData>(
-        static (context, data) => context.DotNetCoreRestore(
-            data.ProjectRoot.FullPath,
-            new DotNetCoreRestoreSettings {
-                Runtime = data.Runtime,
-                MSBuildSettings = data.MSBuildSettings
-            }
-        )
     )
 .Then("Build")
     .Default()
