@@ -189,9 +189,11 @@ Task("Clean")
                     .Append("--generate-notes")
                     .Append(string.Join(
                         ' ',
-                        context
+                        (context
                             .GetFiles(data.NuGetOutputPath.FullPath + "/*.nupkg")
-                            .Select(path => path.FullPath.Quote())
+                        + context
+                            .GetFiles(data.BinaryOutputPath.FullPath + "/*.*")
+                            ).Select(path => path.FullPath.Quote())
                         ))
 
             )
