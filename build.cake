@@ -129,7 +129,7 @@ Task("Clean")
                                                 .Append("-p:IncludeNativeLibrariesInSingleFile=true")
                                                 .Append("-p:IncludeNativeLibrariesForSelfExtract=true"),
                 MSBuildSettings = data.MSBuildSettings,
-                Framework = "net7.0"
+                Framework = "net9.0"
             }
         )
     )
