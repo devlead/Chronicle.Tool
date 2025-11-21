@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Chronicle.Commands.Settings;
 using Microsoft.Extensions.Logging;
@@ -17,7 +18,7 @@ namespace Chronicle.Commands
             Logger = logger;
         }
 
-        public override int Execute(CommandContext context, MoveSettings settings)
+        public override int Execute(CommandContext context, MoveSettings settings, CancellationToken cancellationToken)
         {
             var stopwatch = System.Diagnostics.Stopwatch.StartNew();
             var startDate = DateTime.Now;
