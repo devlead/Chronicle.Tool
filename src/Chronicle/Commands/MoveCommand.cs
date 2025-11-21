@@ -17,7 +17,7 @@ namespace Chronicle.Commands
             Logger = logger;
         }
 
-        public override int Execute(CommandContext context, MoveSettings settings)
+        public override int Execute(CommandContext context, MoveSettings settings, CancellationToken cancellationToken)
         {
             var stopwatch = System.Diagnostics.Stopwatch.StartNew();
             var startDate = DateTime.Now;
