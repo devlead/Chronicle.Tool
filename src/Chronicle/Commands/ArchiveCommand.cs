@@ -2,6 +2,7 @@
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Chronicle.Commands.Settings;
 using Microsoft.Extensions.Logging;
@@ -18,7 +19,7 @@ namespace Chronicle.Commands
             Logger = logger;
         }
 
-        public override async Task<int> ExecuteAsync(CommandContext context, ArchiveSettings settings)
+        public override async Task<int> ExecuteAsync(CommandContext context, ArchiveSettings settings, CancellationToken cancellationToken)
         {
             var stopwatch = System.Diagnostics.Stopwatch.StartNew();
             var startDate = DateTime.Now;
