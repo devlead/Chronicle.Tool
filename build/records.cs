@@ -18,18 +18,18 @@ public record BuildData(
         OutputPath
     };
 
-    public string GitHubNuGetSource { get; } = System.Environment.GetEnvironmentVariable("GH_PACKAGES_NUGET_SOURCE");
-    public string GitHubNuGetApiKey { get; } = System.Environment.GetEnvironmentVariable("GITHUB_TOKEN");
+    public string? GitHubNuGetSource { get; } = System.Environment.GetEnvironmentVariable("GH_PACKAGES_NUGET_SOURCE");
+    public string? GitHubNuGetApiKey { get; } = System.Environment.GetEnvironmentVariable("GITHUB_TOKEN");
 
     public bool ShouldPushGitHubPackages() => !string.IsNullOrWhiteSpace(GitHubNuGetSource)
                                                 && !string.IsNullOrWhiteSpace(GitHubNuGetApiKey);
 
-    public string NuGetSource { get; } = System.Environment.GetEnvironmentVariable("NUGET_SOURCE");
-    public string NuGetApiKey { get; } = System.Environment.GetEnvironmentVariable("NUGET_APIKEY");
+    public string? NuGetSource { get; } = System.Environment.GetEnvironmentVariable("NUGET_SOURCE");
+    public string? NuGetApiKey { get; } = System.Environment.GetEnvironmentVariable("NUGET_APIKEY");
     public bool ShouldPushNuGetPackages() =>    IsMainBranch &&
                                                 !string.IsNullOrWhiteSpace(NuGetSource) &&
                                                 !string.IsNullOrWhiteSpace(NuGetApiKey);
 
 }
 
-private record ExtensionHelper(Func<string, CakeTaskBuilder> TaskCreate, Func<CakeReport> Run);
+internal record ExtensionHelper(Func<string, CakeTaskBuilder> TaskCreate, Func<CakeReport> Run);
