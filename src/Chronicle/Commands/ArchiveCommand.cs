@@ -19,7 +19,7 @@ namespace Chronicle.Commands
             Logger = logger;
         }
 
-        protected override async Task<int> ExecuteAsync(CommandContext context, ArchiveSettings settings, CancellationToken cancellationToken)
+        public override async Task<int> ExecuteAsync(CommandContext context, ArchiveSettings settings, CancellationToken cancellationToken)
         {
             var stopwatch = System.Diagnostics.Stopwatch.StartNew();
             var startDate = DateTime.Now;

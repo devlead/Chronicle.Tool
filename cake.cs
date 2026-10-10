@@ -1,4 +1,5 @@
-#:sdk Cake.Sdk@6.2.0
+#!/usr/bin/env dotnet
+#:sdk Cake.Sdk@6.3.0
 #:property IncludeAdditionalFiles=./build/*.cs
 
 /*****************************
@@ -36,6 +37,8 @@ Setup(
         return new BuildData(
             version,
             isMainBranch,
+            GitHubActions.IsRunningOnGitHubActions,
+            GitHubActions.IsRunningOnGitHubActions ? GitHubActions.Environment.Workflow.Ref : null,
             "src",
             "win-x64",
             new DotNetMSBuildSettings()
@@ -62,7 +65,17 @@ Setup(
 /*****************************
  * Tasks
  *****************************/
-Task("Clean")
+Task("NuGet-Login")
+    .WithCriteria<BuildData>(static (_, data) => data.ShouldLoginNuGet())
+    .Does<BuildData>(static async (context, data) =>
+    {
+        ArgumentException.ThrowIfNullOrEmpty(data.NuGetApiUser);
+
+        context.Information("Logging in to NuGet...");
+        data.NuGetApiKey = await GitHubActions.Commands.NuGetLogin(data.NuGetApiUser);
+        ArgumentException.ThrowIfNullOrEmpty(data.NuGetApiKey);
+    })
+.Then("Clean")
     .Does<BuildData>(
         static (context, data) => context.CleanDirectories(data.DirectoryPathsToClean)
     )
